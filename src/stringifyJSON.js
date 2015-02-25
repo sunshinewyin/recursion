@@ -5,40 +5,44 @@
 
 var stringifyJSON = function (obj) {
   var str = "";
-  var numOfKeysInObj = Object.keys(obj).length;
-  var arrayLength = obj.length;
 
-    if (
-      typeof obj === "number" ||
-      // typeof obj === null ||
-      typeof obj === "boolean" ||
-      typeof obj === "string"
-      ) {
+    if (obj == null) {
+      str += "null";
 
-      str += obj.toString();
-      return str;
+    } else if (typeof obj === "number" || typeof obj === "boolean")
+
+    {
+      str += obj;
+    } else if (typeof obj === "string")
+
+    {
+      str += "\"" + obj + "\"";
 
     } else if (Array.isArray(obj)) {
 
-        if (arrayLength === 0) {
+        if (array.length === 0) {
           return "[]";
         } else {
-          for (var i=0; i<arrayLength; i++) {
+          for (var i=0; i<array.length; i++) {
             str = str + stringifyJSON(obj[i]) + ",";
           }
           str = "[" + str + "]";
         }
 
     } else if (typeof obj === "object") {
+        var numOfKeysInObj = Object.keys(obj).length;
 
         if (numOfKeysInObj === 0) {
             return "{}";
-
         } else {
             for (var p in obj) {
-            str = str + stringifyJSON(p) + ":" + stringifyJSON(obj[p]) + ",";
-            numOfKeysInObj--;
-            }
+
+              if (typeof (obj[p]) == "undefined" || typeof (obj[p]) == "function") {
+                delete obj[p];
+              }
+              str = str + stringifyJSON(p) + ":" + stringifyJSON(obj[p]) + ",";
+              numOfKeysInObj--;
+              }
             str = "{" + str + "}";
         }
     }
@@ -46,4 +50,4 @@ var stringifyJSON = function (obj) {
     return str;
 };
 
-//to do: (1) figure out how to get rid of trailing commas; (2) terminate for unstringfiableValues; (3) make sure array within arrays works, (4) what's up with null
+//to do: (1) figure out how to get rid of trailing commas
