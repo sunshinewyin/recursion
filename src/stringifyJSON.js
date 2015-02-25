@@ -13,6 +13,7 @@ var stringifyJSON = function (obj) {
 
     {
       str += obj;
+
     } else if (typeof obj === "string")
 
     {
@@ -20,20 +21,23 @@ var stringifyJSON = function (obj) {
 
     } else if (Array.isArray(obj)) {
 
-        if (array.length === 0) {
+        if (obj.length === 0) {
           return "[]";
+
         } else {
-          for (var i=0; i<array.length; i++) {
+          for (var i=0; i<obj.length; i++) {
             str = str + stringifyJSON(obj[i]) + ",";
           }
           str = "[" + str + "]";
         }
 
     } else if (typeof obj === "object") {
+
         var numOfKeysInObj = Object.keys(obj).length;
 
         if (numOfKeysInObj === 0) {
             return "{}";
+
         } else {
             for (var p in obj) {
 
