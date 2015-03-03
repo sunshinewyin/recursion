@@ -10,16 +10,11 @@ var stringifyJSON = function (obj) {
   // if obj is null, then return string = "null"
     if (obj == null) {
       str += "null";
-
   // if obj is a number or a boolean, append obj to string
-    } else if (typeof obj === "number" || typeof obj === "boolean")
-
-    {
+    } else if (typeof obj === "number" || typeof obj === "boolean"){
       str += obj;
   // separate category for strings because strings are already strings, but JSON.stringfy has outer quotes for strings
-    } else if (typeof obj === "string")
-
-    {
+    } else if (typeof obj === "string"){
 
     //use escape to add outer quotes to strings
       str += "\"" + obj + "\"";
@@ -70,7 +65,7 @@ var stringifyJSON = function (obj) {
               //count down the counter by one each time
               numOfKeysInObj--;
             }
-        ////if the string ends in a comma, then remove that comma so there are no trailing commas (is there a more elegant way to this?)
+        //if the string ends in a comma, then remove that comma so there are no trailing commas (is there a more elegant way to this?)
         if (str.charAt(str.length-1) === ",") {
           str = str.slice(0,str.length-1);
         }
